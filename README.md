@@ -1,35 +1,76 @@
-# Staxtech_P_1
-# 🧠 Quiz Game in Python
+# 🧠 General Knowledge Quiz Game (CLI)
 
-This is a simple **Quiz Game** built with Python. It presents users with multiple-choice questions, accepts their answers, tracks scores, and gives final feedback.
+This is a Python-based **Quiz Game** that fetches live general knowledge questions using the **Open Trivia DB API**. It runs in the terminal and tests your knowledge by presenting multiple-choice questions.
+
+---
 
 ## 🎯 Features
 
-- Multiple-choice questions
-- Score tracking
-- Answer validation with feedback
-- Easy to expand (add more questions, categories, etc.)
-  
-## 📷 Demo Output
+- ✅ Pulls **real-time questions** from the web
+- ✅ Multiple-choice format (A/B/C/D)
+- ✅ Keeps score and shows result at the end
+- ✅ Decodes HTML characters for readable questions
+- ✅ Clean and beginner-friendly Python code
 
-🎯 Welcome to the Quiz Game!
+---
 
-Q1: What is the capital of France?
-A. Berlin
-B. Madrid
-C. Paris
-D. Rome
-Your answer (A/B/C/D): C
+## 🛠️ Requirements
+
+- Python 3.x
+- `requests` library (install using pip)
+
+### Install `requests`:
+```bash
+pip install requests
+
+
+🚀 How to Run
+1.Clone or download this repository:
+
+git clone https://github.com/yourusername/quiz-game.git
+cd quiz-game
+
+2.Run the script:
+
+python quiz_game.py
+
+---
+
+💡 Example Usage
+
+🎯 Welcome to the General Knowledge Quiz!
+
+Q1: What is the capital of Australia?
+A. Canberra
+B. Sydney
+C. Melbourne
+D. Perth
+Your answer (A/B/C/D): A
 ✅ Correct!
 
 ...
 
-📊 Quiz Completed!
-Your final score is: 3/4
+🏁 Quiz Over! Your final score: 4/5
 
-## 🛠 How to Use
+---
 
-### 1. Clone or Download the Repository
-```bash
-git clone https://github.com/yourusername/quiz-game.git
-cd quiz-game
+📚 Topics Covered
+
+Python Functions & Loops
+Working with APIs using requests
+Handling JSON responses
+String manipulation and user input
+HTML entity decoding (html.unescape)
+
+📁 File Structure
+
+quiz-game/
+│
+├── quiz_game.py     # Main Python script
+└── README.md        # Project documentation
+
+📌 Trivia API Source
+This project uses the free Open Trivia Database API.
+
+🙋 Author
+Your Name – Afnaan037
