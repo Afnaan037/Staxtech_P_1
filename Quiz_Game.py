@@ -1,49 +1,51 @@
+import requests
+import html
+import random
 
-questions = [
-    {
-        "question": "What is the capital of France?",
-        "options": ["A. Berlin", "B. Madrid", "C. Paris", "D. Rome"],
-        "answer": "C"
-    },
-    {
-        "question": "Which planet is known as the Red Planet?",
-        "options": ["A. Earth", "B. Mars", "C. Jupiter", "D. Venus"],
-        "answer": "B"
-    },
-    {
-        "question": "What language is used to create Android apps?",
-        "options": ["A. Python", "B. Swift", "C. Kotlin", "D. Ruby"],
-        "answer": "C"
-    },
-    {
-        "question": "Who wrote 'Romeo and Juliet'?",
-        "options": ["A. Charles Dickens", "B. William Shakespeare", "C. Mark Twain", "D. Jane Austen"],
-        "answer": "B"
-    }
-]
+
+def get_questions(amount=5):
+    category_id = "9"  # General Knowledge
+    url = f"https://opentdb.com/api.php?amount={amount}&category={category_id}&type=multiple"
+    response = requests.get(url)
+    data = response.json()
+    return data["results"]
 
 
 def run_quiz():
-    print("\n🎯 Welcome to the Quiz Game!")
+    print("🎯 Welcome to the General Knowledge Quiz!\n")
+    questions = get_questions()
+
     score = 0
 
-    for index, q in enumerate(questions, start=1):
-        print(f"\nQ{index}: {q['question']}")
-        for option in q['options']:
-            print(option)
+    for i, q in enumerate(questions, 1):
+        question = html.unescape(q["question"])
+        correct_answer = html.unescape(q["correct_answer"])
+        incorrect_answers = [html.unescape(ans)
+                             for ans in q["incorrect_answers"]]
 
-        user_answer = input("Your answer (A/B/C/D): ").upper()
+        options = incorrect_answers + [correct_answer]
+        random.shuffle(options)
 
-        if user_answer == q["answer"]:
-            print("✅ Correct!")
+        print(f"Q{i}: {question}")
+        for idx, option in enumerate(options):
+            print(f"{chr(65 + idx)}. {option}")
+
+        user_input = input("Your answer (A/B/C/D): ").upper()
+
+        try:
+            selected_option = options[ord(user_input) - 65]
+        except:
+            print("❌ Invalid input. Skipping question.\n")
+            continue
+
+        if selected_option == correct_answer:
+            print("✅ Correct!\n")
             score += 1
         else:
-            print(f"❌ Wrong! The correct answer was {q['answer']}")
+            print(f"❌ Wrong! Correct answer was: {correct_answer}\n")
 
-    print("\n📊 Quiz Completed!")
-    print(f"Your final score is: {score}/{len(questions)}")
+    print(f"🏁 Quiz Over! Your final score: {score}/{len(questions)}")
 
 
-# Run the quiz
 if __name__ == "__main__":
     run_quiz()
